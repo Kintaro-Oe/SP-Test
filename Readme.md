@@ -1,8 +1,8 @@
-# Log Display
+# Log Parse
 
 ## How is it used?
 
-A webserver log is provided and formatted information is return.
+A webserver log is provided and formatted information is returned.
 
 ## Input and Output types
 
