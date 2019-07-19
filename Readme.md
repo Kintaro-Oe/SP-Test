@@ -39,3 +39,7 @@ Output should be:
   "/help_page 1 visit /contact 1 visit /home 1 visit\n/help_page 1 unique view /contact 1 unique view /home 1 unique view"
 
 ## Edge cases
+
+## Instructions
+
+Clone the repo, and `bundle install` to get started.
