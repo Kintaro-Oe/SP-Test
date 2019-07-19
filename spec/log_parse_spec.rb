@@ -13,13 +13,21 @@ describe LogParse do
   end
 
   describe '#count_all_visits' do
-    it 'returns a hash with the number of visits for each page' do
+    it 'returns a hash showing each new page with a single visit' do
       file = double(file)
       allow(File).to receive(:open).with("sample.log", "r").and_return(file)
       allow(file).to receive(:readlines).and_return(["/help_page/1 126.318.035.038"])
       allow(file).to receive(:close)
 
       expect(log_parse.count_all_visits("sample.log")).to eq({"/help_page/1" =>1})
+    end
+    it 'returns a hash showing each new page with visit counted' do
+      file = double(file)
+      allow(File).to receive(:open).with("sample.log", "r").and_return(file)
+      allow(file).to receive(:readlines).and_return(["/help_page/1 126.318.035.038", "/help_page/1 126.318.035.038"])
+      allow(file).to receive(:close)
+
+      expect(log_parse.count_all_visits("sample.log")).to eq({"/help_page/1" =>2})
     end
   end
 end

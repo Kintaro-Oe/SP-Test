@@ -8,11 +8,16 @@ class LogParse
 
     file.readlines.each do |line|
       visit_details = line.split(" ")
-      @all_visits[visit_details[0]] = 1
+      page = visit_details[0]
+      if @all_visits.include? page
+        @all_visits[page] += 1
+      else
+        @all_visits[page] = 1
+      end
     end
     file.close
 
-    @all_visits
+    p @all_visits
   end
 
   def try_load_log
