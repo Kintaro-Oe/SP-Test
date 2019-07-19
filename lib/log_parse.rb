@@ -17,7 +17,11 @@ class LogParse
     end
     file.close
 
-    p @all_visits
+    @all_visits
+  end
+
+  def sort_hash(hash_input)
+    hash_input.sort_by {|k,v| [-v,k]}.to_h #high to low and alphabetised
   end
 
   def try_load_log
@@ -30,6 +34,7 @@ class LogParse
      puts "sorry, #{filename} doesn't exist."
     end
   end
+
 end
 
 log_parse = LogParse.new

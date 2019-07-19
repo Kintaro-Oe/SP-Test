@@ -30,4 +30,21 @@ describe LogParse do
       expect(log_parse.count_all_visits("sample.log")).to eq({"/help_page/1" =>2})
     end
   end
+
+  describe '#sort_hash' do
+    it 'returns hash sorted high to low and also aphabetised' do
+      expect(log_parse.sort_hash({
+        "/help_page/1"=>1,
+        "/contact"=>2,
+        "/home"=>1,
+        "/about/2"=>2
+        }).first).to eq(["/about/2", 2])
+    end
+  end
+
+  # describe '#display_all_visits' do
+  #   it 'returns a formatted string' do
+  #
+  #   end
+  # end
 end
