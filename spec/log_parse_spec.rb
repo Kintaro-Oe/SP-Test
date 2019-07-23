@@ -42,9 +42,29 @@ describe LogParse do
     end
   end
 
-  # describe '#display_all_visits' do
-  #   it 'returns a formatted string' do
-  #
-  #   end
-  # end
+  describe '#display_all_visits' do
+    it 'returns a formatted string' do
+      file = double(file)
+      allow(File).to receive(:open).with("sample.log", "r").and_return(file)
+      allow(file).to receive(:readlines).and_return([
+        "/help_page/1 126.318.035.038",
+        "/contact 184.123.665.067",
+        "/contact 444.123.665.067",
+        "/home 184.123.665.067",
+        "/about/2 444.701.448.104",
+        "/about/2 184.701.448.104"
+        ])
+      allow(file).to receive(:close)
+
+      log_parse.count_all_visits("sample.log")
+      data = log_parse.sort_hash(log_parse.all_visits)
+
+      expect { log_parse.display_data(data) }.to output(
+        "/about/2 2 visits\n" +
+        "/contact 2 visits\n" +
+        "/help_page/1 1 visit\n" +
+        "/home 1 visit\n"
+      ).to_stdout
+    end
+  end
 end

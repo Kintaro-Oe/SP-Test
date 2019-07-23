@@ -1,4 +1,6 @@
 class LogParse
+  attr_reader :all_visits
+
   def initialize
     @all_visits = {}
   end
@@ -24,6 +26,12 @@ class LogParse
     hash_input.sort_by {|k,v| [-v,k]}.to_h #high to low and alphabetised
   end
 
+  def display_data(hash_input)
+    hash_input.each do |page, count|
+      puts "#{page} #{count} #{count > 1? "visits" : "visit"}"
+    end
+  end
+
   def try_load_log
     filename = ARGV.first  # first argument from the command line
     return if filename.nil? # get out of the method if it isn't given
@@ -39,3 +47,5 @@ end
 
 log_parse = LogParse.new
 log_parse.try_load_log
+data = log_parse.sort_hash(log_parse.all_visits)
+log_parse.display_data(data)
